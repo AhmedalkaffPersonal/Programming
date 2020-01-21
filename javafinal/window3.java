@@ -12,6 +12,7 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -97,7 +98,7 @@ public class window3 {
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
-		JRadioButton rdbtnMale = new JRadioButton("Male");
+		final JRadioButton rdbtnMale = new JRadioButton("Male");
 		rdbtnMale.setBackground(new Color(102, 153, 102));
 		rdbtnMale.setForeground(new Color(0, 0, 0));
 		rdbtnMale.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -108,11 +109,20 @@ public class window3 {
 		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rdbtnNewRadioButton.setBackground(new Color(102, 153, 102));
 		rdbtnNewRadioButton.setBounds(319, 189, 109, 23);
+		
+		ButtonGroup G = new ButtonGroup();
+		G.add(rdbtnMale);		
+		G.add(rdbtnNewRadioButton);		
 		frame.getContentPane().add(rdbtnNewRadioButton);
 		
 		JButton btnNewButton = new JButton("Next");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(DataManager.AddLicence(textField.getText(), txtLastName.getText(), rdbtnMale.isSelected() ?"Male":"Female",textField_2.getText()))
+				{
+					window4 b=new window4();
+				}
 				FileWriter fw = null;
 				BufferedWriter bw = null;
 				try {
@@ -125,17 +135,17 @@ public class window3 {
 				}
 				//bw.write(textField.getText());
 				//bw.write(txtLastName.getText());
-				PrintWriter pw=new PrintWriter(bw);
-				pw.println(textField.getText());
-				pw.println(txtLastName.getText());
-				pw.close();
+				//PrintWriter pw=new PrintWriter(bw);
+				//pw.println(textField.getText());
+				//pw.println(txtLastName.getText());
+				//pw.close();
 				//PrintWriter pw=new PrintWriter(fw);
 				//pw.println(textField.getText());
 				//pw.println(txtLastName.getText());
 				//pw.close();
-				window4 b=new window4();
-				b.fw=fw;
-				b.new2();
+				
+				//b.fw=fw;
+				//b.new2();
 				frame.setVisible(false);
 			}
 		});
